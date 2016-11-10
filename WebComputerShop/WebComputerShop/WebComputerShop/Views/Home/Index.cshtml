@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebComputerShop.Models.Product>
+
+
+
+<div class="container body-content">
+    <div class="Search"> </div>
+    <center><h3><b>Welcome to Computer WebShop</b></h3></center> <div class="Search">
+        <b>Search:<input ng-model="search" /></b><br /><br />
+    </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <h1>
+                    <img src="~/Content/Pictures/Laptop_1.jpg" width="360" height="240" alt="Laptop_1" />  Lenovo Yogalaptop
+                </h1>
+            </div>
+
+
+            <div class="item">
+                <h1>
+                    <img src="~/Content/Pictures/Laptop_2.jpg" width="360" height="240" alt="Laptop_2" />    Asus Laptop
+                </h1>
+            </div>
+
+            <div class="item">
+                <h1>
+                    <img src="~/Content/Pictures/Tablett_1.jpg" width="340" height="240" alt="Tablett_1" />  Samsung Tablett
+                </h1>
+            </div>
+
+            <div class="item">
+                <h1>
+                    <img src="~/Content/Pictures/tablett_2.jpg" width="360" height="240" alt="Tablett_2" />   Apple Tablett
+                </h1>
+            </div>
+            <div class="item">
+                <h1>
+                    <img src="~/Content/Pictures/Desktop_1.gif" width="360" height="240" alt="Desktop_1" />    Apple Desktop
+                </h1>
+            </div>
+            <div class="item">
+                <h1>
+                    <img src="~/Content/Pictures/Desktop_2.jpg" width="360" height="240" alt="Desktop_2" />    HP Desktop
+                </h1>
+            </div>
+
+        </div>
+        <!-- Left and right controls -->     <!--icon-prev-->
+        <a class="left carousel-control " href="#myCarousel" role="button" data-slide="prev">
+
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <!--icon-next-->
+        <a class="right carousel-control " href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<br />
+
+<div id="Cart">
+    @Html.Action("Cart")
+
+</div>
+
+
+<div class="produktbilder">
+    @foreach (var product in Model)
+    {
+        <div class="productCard">
+            <img src="@product.ImgUrl" /><br />
+            <h4>Name: @product.Name</h4>
+            <h4>Description:@product.Item_Discription</h4>
+            <h4>Price:@product.Price</h4><br />
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Add Cart", "addToCart", "Home", new { product.Id }, new { @class = "btn btn-success" })
+
+            }
+        </div>
+    }
+</div>
